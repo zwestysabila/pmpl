@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Start a new To-Do lists</title>
+        <title>To-Do lists</title>
     </head>
     <body>
     <h1>Your To-Do list</h1>
@@ -9,7 +9,12 @@
         {% csrf_token %}
     </form>
 
-    {{ comment }}
+    <span>{{ comment }}</span>
    
+    <table id="id_list_table">
+        {% for item in items %}    
+            <tr><td>{{ forloop.counter }}: {{ item.text }}</td></tr>
+        {% endfor %}        
+    </table>
     </body>
 </html>
