@@ -1,8 +1,8 @@
 #id_new_item {
     margin-top: 2ex;
     background: black;
+    width: 10;
 }
 h1 {
-    font-style: italic;
+    text-align:right;
 }
-
