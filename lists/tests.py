@@ -47,38 +47,37 @@ class HomePageTest(TestCase):
         )
         self.assertEqual(response.content.decode(), expected_html)
 
-    def test_home_page_displays_comments_zero(self):
-        request = HttpRequest()
-        response = home_page(request)
+#    def test_home_page_displays_comments_zero(self):
+#       response = home_page(request)
+#
+#        self.assertEqual(Item.objects.count(), 0)
+#        self.assertIn('yey, waktunya berlibur', response.content.decode())
 
-        self.assertEqual(Item.objects.count(), 0)
-        self.assertIn('yey, waktunya berlibur', response.content.decode())
+#    def test_home_page_displays_comments_less_five(self):
+#        list_ = List.objects.create()
+#        Item.objects.create(text='itemey 1', list=list_)
+#        Item.objects.create(text='itemey 2', list=list_)
 
-    def test_home_page_displays_comments_less_five(self):
-        list_ = List.objects.create()
-        Item.objects.create(text='itemey 1', list=list_)
-        Item.objects.create(text='itemey 2', list=list_)
+#        request = HttpRequest()
+#        response = home_page(request)
 
-        request = HttpRequest()
-        response = home_page(request)
+#        self.assertLess(Item.objects.count(), 5)
+#        self.assertGreater(Item.objects.count(), 0)
+#        self.assertIn('sibuk tapi santai', response.content.decode())
 
-        self.assertLess(Item.objects.count(), 5)
-        self.assertGreater(Item.objects.count(), 0)
-        self.assertIn('sibuk tapi santai', response.content.decode())
+#    def test_home_page_displays_comments_greater_equal_five(self):
+#        list_ = List.objects.create()
+#        Item.objects.create(text='itemey 1', list=list_)
+#        Item.objects.create(text='itemey 2', list=list_)
+#        Item.objects.create(text='itemey 3', list=list_)
+#        Item.objects.create(text='itemey 4', list=list_)
+#        Item.objects.create(text='itemey 5', list=list_)
 
-    def test_home_page_displays_comments_greater_equal_five(self):
-        list_ = List.objects.create()
-        Item.objects.create(text='itemey 1', list=list_)
-        Item.objects.create(text='itemey 2', list=list_)
-        Item.objects.create(text='itemey 3', list=list_)
-        Item.objects.create(text='itemey 4', list=list_)
-        Item.objects.create(text='itemey 5', list=list_)
+#        request = HttpRequest()
+#        response = home_page(request)
 
-        request = HttpRequest()
-        response = home_page(request)
-
-        self.assertGreaterEqual(Item.objects.count(), 5)
-        self.assertIn('oh tidak', response.content.decode())
+#        self.assertGreaterEqual(Item.objects.count(), 5)
+#        self.assertIn('oh tidak', response.content.decode())
 
 class NewListTest(TestCase):
     def test_saving_a_POST_request(self):
