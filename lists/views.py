@@ -18,7 +18,11 @@ def view_list(request, list_id):
 def home_page(request):
     #if request.method == 'POST':
      #   Item.objects.create(text=request.POST['item_text'])
-      #  return redirect('/lists/the-only-list-in-the-world/')  
+      #  return redirect('/lists/the-only-list-in-the-world/')
+    return render(request, 'index.html')
+
+def list_page(request):
+    countsItem = Item.objects.count()
     comment = 'yey, waktunya berlibur'   
     return render(request, 'home.html', {'comment':comment})
 
