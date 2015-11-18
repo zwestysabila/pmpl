@@ -6,6 +6,10 @@ from lists.models import Item, List
 # Create your views here.
 def view_list(request, list_id):
     list_ = List.objects.get(id=list_id)
+    if request.method == 'POST':
+        Item.objects.create(text=request.POST['item_text'], list=list_)
+        return redirect('/lists/%d/' % (list_.id,))
+    
     countList = Item.objects.filter(list_id=list_.id).count()
     if countList == 0 :
         comment = 'yey, waktunya berlibur'
@@ -28,11 +32,6 @@ def list_page(request):
     countsItem = Item.objects.count()
     comment = 'yey, waktunya berlibur'   
     return render(request, 'home.html', {'comment':comment})
-
-def add_item(request, list_id):
-    list_ = List.objects.get(id=list_id)
-    Item.objects.create(text=request.POST['item_text'], list=list_)
-    return redirect('/lists/%d/' % (list_.id,))
 
 def new_list(request):
     list_ = List.objects.create()
