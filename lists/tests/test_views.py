@@ -22,8 +22,9 @@ class HomePageTest(TestCase):
         self.assertEqual(response.content.decode(), expected_html)
 
 #    def test_home_page_displays_comments_zero(self):
-#       response = home_page(request)
-#
+#        request = HttpRequest()
+#        response = home_page(request)
+
 #        self.assertEqual(Item.objects.count(), 0)
 #        self.assertIn('yey, waktunya berlibur', response.content.decode())
 
@@ -120,3 +121,14 @@ class ListViewTest(TestCase):
         correct_list = List.objects.create()
         response = self.client.get('/lists/%d/' % (correct_list.id,))
         self.assertEqual(response.context['list'], correct_list)
+
+    def test_validation_errors_end_up_on_lists_page(self):
+        list_ = List.objects.create()
+        response = self.client.post(
+            '/lists/%d/' % (list_.id,),
+            data={'item_text': ''}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'list.html')
+        expected_error = escape("You can't have an empty list item")
+        self.assertContains(response, expected_error)
